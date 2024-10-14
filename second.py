@@ -52,7 +52,7 @@ def cislo_text(cislo):
     #                       : vypíše text pro 11 až 19             
         if cislo >10 and cislo < 20:
             koncovka = "náct"
-    #   testuje, zda je nestandardní skloňování. 
+    #   testuje, zda je nestandardní výslovnost. 
             vysledny_text = nestandardni.get(cislo, jednotky.get(hodnota_jednotky))+koncovka
             return vysledny_text 
     #                       : vypíše text pro 21 až 99             
@@ -62,7 +62,7 @@ def cislo_text(cislo):
                 koncovka = "cet" 
             else: 
                 koncovka = "desát"
-    #   Opět testuje nestandardní skloňování v řádu desítek. Poskládá text pro desítky a přidá text pro jednotky. 
+    #   Opět testuje nestandardní výslovnost v řádu desítek. Poskládá text pro desítky a přidá text pro jednotky. 
         vysledny_text = nestandardni.get(hodnota_desitky_nestandardni, jednotky.get(hodnota_desitky))+koncovka+" " + jednotky.get(hodnota_jednotky, "")
         return vysledny_text 
 

@@ -56,7 +56,7 @@ def cislo_text(cislo):
         if cislo >10 and cislo < 20:
             koncovka = "náct"
     
-    #   testuje, zda je nestandardní skloňování. Pokud ano, vypíše základ z proměnné "nestandardni" a doplní "koncovka", jinak vypíše "jednotky" a doplní koncovku
+    #   testuje, zda je nestandardní výslovnost. Pokud ano, vypíše základ z proměnné "nestandardni" a doplní "koncovka", jinak vypíše "jednotky" a doplní koncovku
     #   př. pro číslo 14: vypíše z "nestandardni" podle hodnoty klíče "čtr" + doplní "náct" = čtrnáct
     #   př. pro číslo 18: vypíše z "jednotky" podle hodnoty klíče "osm" + doplní "náct" = osmnáct
             vysledny_text = nestandardni.get(cislo, jednotky.get(hodnota_jednotky))+koncovka
@@ -71,7 +71,7 @@ def cislo_text(cislo):
             else: 
                 koncovka = "desát"
     
-    #   Opět testuje nestandardní skloňování v řádu desítek. Poskládá text pro desítky a přidá text pro jednotky. 
+    #   Opět testuje nestandardní výslovnost v řádu desítek. Poskládá text pro desítky a přidá text pro jednotky. 
     #   Pokud se jednotky = 0 (např u čísla 40), vrátí za jednotky prázdný řetězec.
         vysledny_text = nestandardni.get(hodnota_desitky_nestandardni, jednotky.get(hodnota_desitky))+koncovka+" " + jednotky.get(hodnota_jednotky, "")
         return vysledny_text 
