@@ -3,7 +3,7 @@ def cislo_text(cislo):
     # napr: "25" -> "dvacet pět", omezte se na cisla od 0 do 100
     #---------------------------------------------------
 
-    #---------------------------------------------------  Rozdíly ve skloňování
+    #---------------------------------------------------  Rozdíly ve výslovnosti
     # 
     #   0   nula
     #   100 sto
