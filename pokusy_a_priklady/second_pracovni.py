@@ -79,7 +79,7 @@ def cislo_text(cislo):
 
 if __name__ == "__main__":
 
-# tento cyklus je jen pro kontrolu, abych nemusel každá čísla zadávat uvlášť
+# tento cyklus je jen pro kontrolu, abych nemusel každá čísla zadávat zvlášť
 #    for x in range(101):
 #        text = cislo_text(x)
 #        print(f"Zadané číslo: {x} = {text}")
