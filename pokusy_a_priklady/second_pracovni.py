@@ -1,12 +1,12 @@
 def cislo_text(cislo):
     # funkce zkonvertuje cislo do jeho textove reprezentace
     # napr: "25" -> "dvacet pět", omezte se na cisla od 0 do 100
+    #---------------------------------------------------
 
-    # Rozdíly ve skloňování
-
+    #---------------------------------------------------  Rozdíly ve skloňování
+    # 
     #   0   nula
     #   100 sto
-
     #--------------------------------------------------- rozdíly v jednotkách v 11-19 -------------------
     #   11   jedna   jede náct       náct    rozdíl
     #   12   dva     dva náct        náct    ok
@@ -17,8 +17,7 @@ def cislo_text(cislo):
     #   17   sedm    sedm náct       náct    ok
     #   18   osm     osm náct        náct    ok
     #   19   devět   devate náct     náct    rozdíl
-
-    #--------------------------------------------------- rozdíly v desítkách v 20-90
+    #--------------------------------------------------- rozdíly v desítkách v 20-90 -------------------
     #   10  jedna   de set                      set     rozdíl  - do seznamu jednotek
     #   20  dva     dva cet                     cet     ok
     #   30  tři     tři cet                     cet     ok
