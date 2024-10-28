@@ -93,5 +93,5 @@ if __name__ == "__main__":
     if vracenecislo[0] != None:
         print(f" Cislo {vracenecislo[0]} je prvocislo = {vracenecislo[1]}")
     print("--------------------------")
-    print(f" Seznam prvočísel: {vrat_prvocisla(zadej)}")
+    print(f" Seznam prvočísel rozsahu 1-{zadej}: {vrat_prvocisla(zadej)}")
     
