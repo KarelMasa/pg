@@ -24,24 +24,31 @@ def urcityp_vrat_pouze_int(parametr1):
         pom1 = len(text)
         if pom1 > 0:
             jetocislo = True
+            countminus = 0
+            counttecka = 0
             for c in range(0,pom1):
-                if text[c] not in {'-','.','0','1','2','3','4','8','6','7','8','9'}: 
+                if text[c] not in {'-','.','0','1','2','3','4','5','6','7','8','9'}: 
                     jetocislo = False
+                else:
+                    if text[c] == '-': countminus += 1
+                    if text[c] == '.': counttecka += 1 
+                    if countminus > 1 or counttecka > 1: jetocislo = False
+
             if jetocislo == True:
                 if ',' in text:
                     cislo1 = tuple(text)
-                    print(f"Zadané číslo: '{parametr1}' se převádí jako typ 'tuple'")
+                    #print(f"Zadané číslo: '{parametr1}' se převádí jako typ 'tuple'")
                 elif '.' in text:
                         cislo1 = float(text)
                 
-                        print(f"Zadané číslo: '{parametr1}' se převádí jako typ 'float'")
+                        #print(f"Zadané číslo: '{parametr1}' se převádí jako typ 'float'")
                 else:
                     cislo1 = int(text)
-                    print(f"Zadané číslo: '{parametr1}' se převádí jako typ 'int'")
-                return cislo1
+                    #print(f"Zadané číslo: '{parametr1}' se převádí jako typ 'int'")
+                    return cislo1
             else:
                 cislo1 = str(text)
-                print(f"Zadané číslo: '{parametr1}' se převádí jako typ 'str'")
+                #print(f"Zadané číslo: '{parametr1}' se převádí jako typ 'str'")
 
 
 #                                                               Funkce zjistuje, zda je zadane cislo prvocislem. Funkce vraci 2 hodnoty: (cislo, false/true). Pokud vstupni paramet neodpovida pozadavkum, vraci (None, None)
