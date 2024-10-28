@@ -31,15 +31,14 @@ def urcityp_vrat_pouze_int(parametr1):
                 if ',' in text:
                     cislo1 = tuple(text)
                     print(f"Zadané číslo: '{parametr1}' se převádí jako typ 'tuple'")
-                else:
-                    if '.' in text:
+                elif '.' in text:
                         cislo1 = float(text)
                 
                         print(f"Zadané číslo: '{parametr1}' se převádí jako typ 'float'")
-                    else: 
-                        cislo1 = int(text)
-                        print(f"Zadané číslo: '{parametr1}' se převádí jako typ 'int'")
-                    return cislo1
+                else:
+                    cislo1 = int(text)
+                    print(f"Zadané číslo: '{parametr1}' se převádí jako typ 'int'")
+                return cislo1
             else:
                 cislo1 = str(text)
                 print(f"Zadané číslo: '{parametr1}' se převádí jako typ 'str'")
@@ -49,13 +48,13 @@ def urcityp_vrat_pouze_int(parametr1):
 def je_prvocislo(cislo):
     cislo_int = urcityp_vrat_pouze_int(cislo)
     if cislo_int != None and cislo_int > 0: 
-        celecislo = int(sqrt(cislo) // 1)
+        celecislo = int(sqrt(cislo_int) // 1)
         if cislo_int == 1:
             prvocislo_test = False
         else:
             prvocislo_test = True    
         for x in range(2,celecislo+1):
-            vypocet=cislo/x
+            vypocet=cislo_int/x
             if vypocet % 1 == 0:
                 prvocislo_test = False
         #if prvocislo_test == True: 
@@ -69,7 +68,7 @@ def vrat_prvocisla(max):
     seznam_prvocisel = list()
     cislo_max = urcityp_vrat_pouze_int(max)
     if cislo_max != None and cislo_max > 1: 
-        for y in range(1, max+1):
+        for y in range(1, cislo_max+1):
             vratcislo= je_prvocislo(y)
             if vratcislo[1] == True:
                 seznam_prvocisel.append(vratcislo[0])
@@ -82,25 +81,12 @@ def vrat_prvocisla(max):
     
 
 if __name__ == "__main__":
-    #cislo = input("Zadej celé číslo: ")
-    a=2.5
-    b=16
-    c=45,8
-    d=-27
-    e=-45.8
-    f=-48,8
-    g='2.5'
-    h='28'
-    i='45,8'
-    j='-27'
-    k='-45.8'
-    l='-48,8'
-    m='--2548.54  test'
-    #for y in range(1, 102):
-    vracenecislo = je_prvocislo(1)
+    zadej = input("Zadej číslo: ")
+    #zadej = urcityp_vrat_pouze_int(input("Zadej číslo: "))
+    vracenecislo = je_prvocislo(zadej)
     if vracenecislo[0] != None:
         print(f" Cislo {vracenecislo[0]} je prvocislo = {vracenecislo[1]}")
         
     print("--------------------------")
-    print(f" Seznam prvočísel: {vrat_prvocisla(1)}")
+    print(f" Seznam prvočísel: {vrat_prvocisla(zadej)}")
     
