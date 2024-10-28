@@ -14,7 +14,7 @@ Upravte i druhou funkci vrat_prvocisla, které pro zadané maximum vrátí sezna
 from math import sqrt
 
 
-#                                                                           Funkce testuje, zda je zadany parametr vhodny pro zjisteni prvocisla. Musi byt cele cislo typu 'int'. 
+#                                                                           Funkce testuje, zda je zadany parametr vhodny pro zjisteni prvocisla. Musi byt cele cislo typu 'int'. pokud odpovida pozadavkum, vrati int, jinak vraci None
 def urcityp_vrat_pouze_int(parametr1):
     cislo_typ = type(parametr1)
     if cislo_typ == int:
@@ -37,11 +37,12 @@ def urcityp_vrat_pouze_int(parametr1):
             if jetocislo == True:
                 if ',' in text:
                     cislo1 = tuple(text)
+                    return None
                     #print(f"Zadané číslo: '{parametr1}' se převádí jako typ 'tuple'")
                 elif '.' in text:
                         cislo1 = float(text)
-                
                         #print(f"Zadané číslo: '{parametr1}' se převádí jako typ 'float'")
+                        return None
                 else:
                     cislo1 = int(text)
                     #print(f"Zadané číslo: '{parametr1}' se převádí jako typ 'int'")
@@ -49,6 +50,7 @@ def urcityp_vrat_pouze_int(parametr1):
             else:
                 cislo1 = str(text)
                 #print(f"Zadané číslo: '{parametr1}' se převádí jako typ 'str'")
+                return None
 
 
 #                                                               Funkce zjistuje, zda je zadane cislo prvocislem. Funkce vraci 2 hodnoty: (cislo, false/true). Pokud vstupni paramet neodpovida pozadavkum, vraci (None, None)
@@ -64,7 +66,6 @@ def je_prvocislo(cislo):
             vypocet=cislo_int/x
             if vypocet % 1 == 0:
                 prvocislo_test = False
-        #if prvocislo_test == True: 
         return (cislo_int, prvocislo_test)
     else:
         print(f"Nebylo zadané celé kladné číslo! Nebudeme určovat, zda je '{cislo}' prvočíslo.")
@@ -79,7 +80,6 @@ def vrat_prvocisla(max):
             vratcislo= je_prvocislo(y)
             if vratcislo[1] == True:
                 seznam_prvocisel.append(vratcislo[0])
-                #print(f" Cislo {y} je prvocislo = {je_prvocislo(y)}")
         return seznam_prvocisel
     else:
         print(f"Mebyla nalezena žádná prvočísla.")
@@ -93,5 +93,5 @@ if __name__ == "__main__":
     if vracenecislo[0] != None:
         print(f" Cislo {vracenecislo[0]} je prvocislo = {vracenecislo[1]}")
     print("--------------------------")
-    print(f" Seznam prvočísel rozsahu 1-{zadej}: {vrat_prvocisla(zadej)}")
+    print(f" Seznam prvočísel rozsahu 1 až {zadej}: {vrat_prvocisla(zadej)}")
     
