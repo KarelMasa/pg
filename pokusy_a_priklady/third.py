@@ -89,11 +89,9 @@ def vrat_prvocisla(max):
 
 if __name__ == "__main__":
     zadej = input("Zadej číslo: ")
-    #zadej = urcityp_vrat_pouze_int(input("Zadej číslo: "))
     vracenecislo = je_prvocislo(zadej)
     if vracenecislo[0] != None:
         print(f" Cislo {vracenecislo[0]} je prvocislo = {vracenecislo[1]}")
-        
     print("--------------------------")
     print(f" Seznam prvočísel: {vrat_prvocisla(zadej)}")
     
