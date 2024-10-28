@@ -14,6 +14,14 @@ Upravte i druhou funkci vrat_prvocisla, které pro zadané maximum vrátí sezna
 from math import sqrt
 
 def je_prvocislo(cislo):
+    cislo_prv = 0
+    cislo_typ = type(cislo)
+    if cislo_typ == int: cislo_prv = cislo
+    if cislo_typ == str:
+        text = cislo
+        if ',' in cislo:   print(f"Zadané číslo: {cislo} je typu {cislo_typ}")
+
+
     cisloparam = int(cislo)
     if cisloparam > 0:
         odmocnina = sqrt(cisloparam)
