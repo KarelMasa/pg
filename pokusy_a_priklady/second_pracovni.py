@@ -84,6 +84,6 @@ if __name__ == "__main__":
 #        text = cislo_text(x)
 #        print(f"Zadané číslo: {x} = {text}")
 
-    cislo = input("Zadej číslo: ")
+    cislo = int(input("Zadej číslo: "))
     text = cislo_text(int(cislo))
     print(f"Zadané číslo: {cislo} = {text}")
