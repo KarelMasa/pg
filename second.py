@@ -1,4 +1,5 @@
 def cislo_text(cislo):
+    cislo_Int = int(cislo)
     # funkce zkonvertuje cislo do jeho textove reprezentace
     # napr: "25" -> "dvacet pět", omezte se na cisla od 0 do 100
     #---------------------------------------------------
@@ -34,31 +35,31 @@ def cislo_text(cislo):
     koncovka = ""
     
     # Nastaví desítky a jednotky 
-    hodnota_jednotky = cislo % 10
-    hodnota_desitky = cislo // 10
-    hodnota_desitky_nestandardni = cislo - hodnota_jednotky         # pro kontrolu nestandardních desítek
+    hodnota_jednotky = cislo_Int % 10
+    hodnota_desitky = cislo_Int // 10
+    hodnota_desitky_nestandardni = cislo_Int - hodnota_jednotky         # pro kontrolu nestandardních desítek
 
     # Testuje, zda je číslo v rozsahu dle zadání
-    if cislo > 100 or cislo < 0:
+    if cislo_Int > 100 or cislo_Int < 0:
         return "Zadané číslo není v rozsahu 0 až 100"
     else:
     # Pokud je v rozsahu
     #                       : vypíše text pro 0 a 100     
-        if cislo == 0: return "nula"
-        if cislo == 100: return "sto"
+        if cislo_Int == 0: return "nula"
+        if cislo_Int == 100: return "sto"
     #                       : vypíše text pro 1 až 10             
-        if cislo > 0 and cislo < 11:
-            return jednotky[cislo]
+        if cislo_Int > 0 and cislo_Int < 11:
+            return jednotky[cislo_Int]
     #                       : vypíše text pro 11 až 19             
-        if cislo >10 and cislo < 20:
+        if cislo_Int >10 and cislo_Int < 20:
             koncovka = "náct"
     #   testuje, zda je nestandardní výslovnost. 
-            vysledny_text = nestandardni.get(cislo, jednotky.get(hodnota_jednotky))+koncovka
+            vysledny_text = nestandardni.get(cislo_Int, jednotky.get(hodnota_jednotky))+koncovka
             return vysledny_text 
     #                       : vypíše text pro 21 až 99             
-        if cislo >=20 and cislo < 100:
+        if cislo_Int >=20 and cislo_Int < 100:
     #   nastaví koncovku pro řád desítek: 20 až 40 = "cet", 50 - 90 = "desát"
-            if cislo >=20 and cislo <50: 
+            if cislo_Int >=20 and cislo_Int <50: 
                 koncovka = "cet" 
             else: 
                 koncovka = "desát"
