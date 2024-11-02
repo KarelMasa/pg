@@ -56,9 +56,9 @@ def figurka_v_ceste(figurka, pocatecni_pozice, cilova_pozice,obsazena_pozice, ta
         p_y += tah_y     
         return False"""
 
-    if tah_x == 0:
+    #if tah_x == 0:
         # neco
-        print("neco")
+    #    print("neco")
     if cilova_pozice in obsazena_pozice:
         return True
     else: return False
