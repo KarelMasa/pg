@@ -2,7 +2,17 @@
 
 def zadej_obsazene_pozice_do_sachovnice(obsazeno):
     obs = list(obsazeno)
-    print(f" {obs[1]}")
+    
+    for i in range(0, len(obs)):
+        sour[(obs[i][0])-1][(obs[i][1])-1] = "x"
+        """        ff=obs[i]
+        fx=int(ff[0])-1
+        fy=int(ff[1])-1
+        """ 
+        #sour[ff[0]-1][ff[1]-1] = "x"
+    
+    print(f" {obs}")
+    #print(ff)
 
 if __name__ == "__main__":
     pesec = {"typ": "pěšec", "pozice": (2, 2)}
@@ -76,7 +86,7 @@ if __name__ == "__main__":
 
     #print(sach3)
 
-    #sour[1][1] = "X"
+    sour[1][1] = "X"
 
     """print(ostatni3)
     print(ostatni3[0][1])
@@ -97,7 +107,7 @@ if __name__ == "__main__":
         for i in range(sloupce):
             #print(sour[i][j], end=" ")
             text = text+str(sour[i][j])+" "
-        print("  ",8-j,"  |",text)
+        print("  ",j+1,"  |",text)
         text=""    
     print(f"        ---------------- osa x |")
     print(f"         1 2 3 4 5 6 7 8 osa x |")
