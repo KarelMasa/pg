@@ -1,6 +1,8 @@
 # pro osobni vyzkouseni a procviceni prace s maticemi
 
-
+def zadej_obsazene_pozice_do_sachovnice(obsazeno):
+    obs = list(obsazeno)
+    print(f" {obs[1]}")
 
 if __name__ == "__main__":
     pesec = {"typ": "pěšec", "pozice": (2, 2)}
@@ -31,7 +33,7 @@ if __name__ == "__main__":
         for j in range(8):
             sloupec.append(0)
         sour.append(sloupec)    
-
+    zadej_obsazene_pozice_do_sachovnice(obsazene_pozice)
     
     for p in sachovnice_y:
         ostatni2.append(ostatni)
