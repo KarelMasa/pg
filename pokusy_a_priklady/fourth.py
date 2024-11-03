@@ -6,7 +6,7 @@
 
 sachovnice_x = (1,2,3,4,5,6,7,8) # sloupec
 sachovnice_y = (1,2,3,4,5,6,7,8) # řádek
-
+souradnice_prohozene = False
 # x = označuje sloupec, y řadu
 
 # pravidlo_tahu = (0- pozice, 1- vlevo, 2- vpravo, 3- nahoru, 4- dolu, 5- l_na, 6- p_na, 7- l_do, 8- p_do, 9- pouze_o_1_pole = True/False, 10 - je prvni tah specificky = True/False)
@@ -116,13 +116,16 @@ def uprav_souradnice(fig, cilpoz, obspoz):
         obspoz1.add((x,y))
     print(obspoz)
     print(obspoz1)
+    #souradnice_prohozene = False
     return fig1, cilpoz1, obspoz1
 
 
 
 
 def je_tah_mozny(figurka, cilova_pozice, obsazene_pozice):
+    #if not souradnice_prohozene:
     figurka, cilova_pozice, obsazene_pozice = uprav_souradnice(figurka,cilova_pozice, obsazene_pozice)
+    #    souradnice_prohozene = True
     #print(figurka)
     #print(cilova_pozice)
     #print(obsazene_pozice)
