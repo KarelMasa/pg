@@ -1,11 +1,8 @@
-
-
-#   DULEZITA POZNAMKA - dle zadani v prikladu jsou souradnice pozic prehozene (y,x) vuci zazitemu standardu (x,y)   !!!!!!!!!!!!
-
+"""#   DULEZITA POZNAMKA - dle zadani v prikladu jsou souradnice pozic prehozene (y,x) vuci zazitemu standardu (x,y)   !!!!!!!!!!!!
 #   Prvotne programovano na zaklade zazitich parametru (x,y)
-
 # !!!!!!!!!!!!!!        Bud upravit veskere funkce a vypocty -- prehodit parametry na (y,x)
 # !!!!!!!!!!!!!!        Nebo ve funkcich dopsat prohozeni parametru (x,y) za (y,x)
+"""
 
 sachovnice_x = (1,2,3,4,5,6,7,8) # sloupec
 sachovnice_y = (1,2,3,4,5,6,7,8) # řádek
@@ -14,6 +11,8 @@ sachovnice_y = (1,2,3,4,5,6,7,8) # řádek
 
 # pravidlo_tahu = (0- pozice, 1- vlevo, 2- vpravo, 3- nahoru, 4- dolu, 5- l_na, 6- p_na, 7- l_do, 8- p_do, 9- pouze_o_1_pole = True/False, 10 - je prvni tah specificky = True/False)
 pravidlo_tahu = {0:None, 1: None, 2: None, 3:None, 4:None, 5:None, 6:None, 7:None, 8:None, 9: None, 10: None }
+
+#                                                           prohodi souradnice ze zadani (y,x) na pouzivane (x,y)   -- pouze specifikum pro tento ukol
 
 def tah_mimo_sachovnici(cilova_pozice):
     if cilova_pozice[0] not in sachovnice_x or cilova_pozice[1] not in sachovnice_y:
@@ -25,10 +24,45 @@ def obsazena_pozice(cilova_pozice, obsazene_pozice):
         return True
     else: return False
 
+#   Určí směr tahu fygurky pro další výpočty - vrací směr tahu
+def urci_smer_tahu(p_pozice, c_pozice):
+    smer_tahu="Zustava"
+    smer_tahu_cislo = None
+    # vlevo, vpravo, nahoru, dolu, l_na, p_na, l_do, p_do   x, y
+    if p_pozice[0] == c_pozice[0] and p_pozice[1] == c_pozice[1]: smer_tahu="Zustava"
+    else:
+        if p_pozice[0] == c_pozice[0]:  # osa X = řádek
+            if p_pozice[1] > c_pozice[1]:
+                smer_tahu="dolu"
+                smer_tahu_cislo = 4
+                #print(smer_tahu)
+            elif p_pozice[1] < c_pozice[1]:
+                smer_tahu="nahoru"
+                smer_tahu_cislo = 3
+                #print(smer_tahu)
+        if p_pozice[1] == c_pozice[1]:  # osa Y = sloupec
+            if p_pozice[0] > c_pozice[0]:
+                smer_tahu="vlevo"
+                smer_tahu_cislo = 1
+                #print(smer_tahu)
+            elif p_pozice[0] < c_pozice[0]:
+                smer_tahu="vpravo"
+                smer_tahu_cislo = 2
+                #print(smer_tahu)
+
+    # vrací "text - směr tahu" a číselné označení směru (0- pozice, 1- vlevo, 2- vpravo, 3- nahoru, 4- dolu, 5- l_na, 6- p_na, 7- l_do, 8- p_do, 9- pouze_o_1_pole = True/False)
+    return (smer_tahu, smer_tahu_cislo)
+
 #   DOPSAT funkce
 
+#                                                   Určí, zda je cílová souřadnice vůči počáteční v rámci pravidel tahu
+def urci_spravnost_tahu_podle_pravidel(f_typ,f_pozice, c_pozice, smer, o1pole, tah1):
+    #
+    #
+    return True
+
 #   DOPSAT - bude testovat, zda je nejaka figurka v ceste a brani pohybo na cilove souradnice
-def figurka_v_ceste(figurka, pocatecni_pozice, cilova_pozice,obsazena_pozice, tah_vypocet, prvni_tah_sp):
+def figurka_v_ceste(figurka, pocatecni_pozice, cilova_pozice,obsazena_pozice, tah_vypocet, o1pole, prvni_tah_sp):
     fig = figurka
     pts = prvni_tah_sp
     p_x = pocatecni_pozice[0]
@@ -63,42 +97,35 @@ def figurka_v_ceste(figurka, pocatecni_pozice, cilova_pozice,obsazena_pozice, ta
         return True
     else: return False
 
-#   Určí směr tahu fygurky pro další výpočty - vrací směr tahu
-def urci_smer_tahu(p_pozice, c_pozice):
-    smer_tahu="Zustava"
-    smer_tahu_cislo = None
-    # vlevo, vpravo, nahoru, dolu, l_na, p_na, l_do, p_do   x, y
-    if p_pozice[0] == c_pozice[0] and p_pozice[1] == c_pozice[1]: smer_tahu="Zustava"
-    else:
-        if p_pozice[0] == c_pozice[0]:  # osa X = řádek
-            if p_pozice[1] > c_pozice[1]:
-                smer_tahu="dolu"
-                smer_tahu_cislo = 4
-                #print(smer_tahu)
-            elif p_pozice[1] < c_pozice[1]:
-                smer_tahu="nahoru"
-                smer_tahu_cislo = 3
-                #print(smer_tahu)
-        if p_pozice[1] == c_pozice[1]:  # osa Y = sloupec
-            if p_pozice[0] > c_pozice[0]:
-                smer_tahu="vlevo"
-                smer_tahu_cislo = 1
-                #print(smer_tahu)
-            elif p_pozice[0] < c_pozice[0]:
-                smer_tahu="vpravo"
-                smer_tahu_cislo = 2
-                #print(smer_tahu)
-
-    # vrací "text - směr tahu" a číselné označení směru (0- pozice, 1- vlevo, 2- vpravo, 3- nahoru, 4- dolu, 5- l_na, 6- p_na, 7- l_do, 8- p_do, 9- pouze_o_1_pole = True/False)
-    return (smer_tahu, smer_tahu_cislo)
-
-
-
+def uprav_souradnice(fig, cilpoz, obspoz):
+    fig1 = fig
+    x=0
+    y=0
+    x=fig["pozice"][1]
+    y=fig["pozice"][0]
+    fig1['pozice'] = (x,y)
+    x= cilpoz[1]   
+    y= cilpoz[0]
+    cilpoz1 = (x,y)
+    print(fig1)
+    print(cilpoz1)
+    obspoz1 = set({})
+    for i in obspoz:
+        x=i[1]
+        y=i[0]
+        obspoz1.add((x,y))
+    print(obspoz)
+    print(obspoz1)
+    return fig1, cilpoz1, obspoz1
 
 
 
 
 def je_tah_mozny(figurka, cilova_pozice, obsazene_pozice):
+    figurka, cilova_pozice, obsazene_pozice = uprav_souradnice(figurka,cilova_pozice, obsazene_pozice)
+    #print(figurka)
+    #print(cilova_pozice)
+    #print(obsazene_pozice)
     test_cil = tah_mimo_sachovnici(cilova_pozice)
     test_obsazeni = obsazena_pozice(cilova_pozice, obsazene_pozice)
     if test_cil == False:
@@ -123,6 +150,7 @@ def je_tah_mozny(figurka, cilova_pozice, obsazene_pozice):
     # pravidlo_tahu = (pozice, vlevo, vpravo, nahoru, dolu, l_na, p_na, l_do, p_do, pouze_o_1_pole = True/False, specificky_prvni_tah = True/False)
         if figurka['typ'] == 'pěšec':
             pravidlo_tahu = (figurka['pozice'], (0,0), (0,0), (0,1), (0,0), (0,0), (0,0), (0,0), (0,0), True, True)
+            if figurka['pozice'][0]>2: pravidlo_tahu[10] = False
         elif figurka['typ'] == 'jezdec':
             pravidlo_tahu = (figurka['pozice'], (0,0), (0,0), (0,0), (0,0), (-2,1), (2,1), (-2,-1), (2,-1), False, False)
         elif figurka['typ'] == 'věž':
@@ -141,7 +169,9 @@ def je_tah_mozny(figurka, cilova_pozice, obsazene_pozice):
         if pravidlo_tahu[smer_tahu_figurky[1]] == (0,0): 
             return False 
         else:
-            figurka_v_ceste(figurka["typ"], figurka["pozice"], cilova_pozice, obsazene_pozice, pravidlo_tahu[smer_tahu_figurky[1]], pravidlo_tahu[10] )
+            
+            urci_spravnost_tahu_podle_pravidel(figurka["typ"], figurka["pozice"], cilova_pozice, pravidlo_tahu[smer_tahu_figurky[1]], pravidlo_tahu[9], pravidlo_tahu[10]  )
+            figurka_v_ceste(figurka["typ"], figurka["pozice"], cilova_pozice, obsazene_pozice, pravidlo_tahu[smer_tahu_figurky[1]], pravidlo_tahu[9], pravidlo_tahu[10] )
             return True
     
     #
@@ -159,16 +189,16 @@ if __name__ == "__main__":
 
     
 
-    #print(je_tah_mozny(pesec, (3, 2), obsazene_pozice))  # True
+    print(je_tah_mozny(pesec, (3, 2), obsazene_pozice))  # True
     #print(je_tah_mozny(pesec, (4, 2), obsazene_pozice))  # True, při prvním tahu, může pěšec jít o 2 pole dopředu
     #print(je_tah_mozny(pesec, (5, 2), obsazene_pozice))  # False, protože pěšec se nemůže hýbat o tři pole vpřed (pokud jeho výchozí pozice není v prvním řádku)
-    #print(je_tah_mozny(pesec, (1, 2), obsazene_pozice))  # False, protože pěšec nemůže couvat
+    print(je_tah_mozny(pesec, (1, 2), obsazene_pozice))  # False, protože pěšec nemůže couvat
 
     #print(je_tah_mozny(jezdec, (4, 4), obsazene_pozice))  # False, jezdec se pohybuje ve tvaru písmene L (2 pozice jedním směrem, 1 pozice druhým směrem)
     #print(je_tah_mozny(jezdec, (5, 4), obsazene_pozice))  # False, tato pozice je obsazená jinou figurou
     #print(je_tah_mozny(jezdec, (1, 2), obsazene_pozice))  # True
     #print(je_tah_mozny(jezdec, (9, 3), obsazene_pozice))  # False, je to pozice mimo šachovnici
 
-    print(je_tah_mozny(dama, (8, 1), obsazene_pozice))  # False, dámě v cestě stojí jiná figura
+    #print(je_tah_mozny(dama, (8, 1), obsazene_pozice))  # False, dámě v cestě stojí jiná figura
     #print(je_tah_mozny(dama, (1, 3), obsazene_pozice))  # False, dámě v cestě stojí jiná figura
     #print(je_tah_mozny(dama, (3, 8), obsazene_pozice))  # True
