@@ -109,22 +109,31 @@ def uprav_souradnice(fig, cilpoz, obspoz):
     cilpoz1 = (x,y)
     print(fig1)
     print(cilpoz1)
+    global souradnice_prohozene
     obspoz1 = set({})
-    for i in obspoz:
-        x=i[1]
-        y=i[0]
-        obspoz1.add((x,y))
-    print(obspoz)
-    print(obspoz1)
-    #souradnice_prohozene = False
-    return fig1, cilpoz1, obspoz1
+    if souradnice_prohozene == False:
+        
+        for i in obspoz:
+            x=i[1]
+            y=i[0]
+            obspoz1.add((x,y))
+        souradnice_prohozene = True
+        print(obspoz)
+        print(obspoz1)
+        return fig1, cilpoz1, obspoz1
+    else:
+        print(obspoz)
+        print(obspoz1)
+        return fig1, cilpoz1, obspoz
 
 
 
 
 def je_tah_mozny(figurka, cilova_pozice, obsazene_pozice):
-    #if not souradnice_prohozene:
+    global souradnice_prohozene
+#    if souradnice_prohozene is False:
     figurka, cilova_pozice, obsazene_pozice = uprav_souradnice(figurka,cilova_pozice, obsazene_pozice)
+        #global souradnice_prohozene
     #    souradnice_prohozene = True
     #print(figurka)
     #print(cilova_pozice)
