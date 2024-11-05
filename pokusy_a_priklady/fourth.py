@@ -81,12 +81,27 @@ def urci_spravnost_tahu_podle_pravidel(f_typ,f_pozice, c_pozice, smer, o1pole, t
         if (f_pozice[0] + smer[0] == c_pozice[0]) and (f_pozice[1] + smer[1] == c_pozice[1]): return True
         else: return False
 #        print("jezdec - doplnit")
-    elif o1pole == True:
-        if (f_pozice[0] + smer[0] == c_pozice[0]) and (f_pozice[1] + smer[1] == c_pozice[1]): return True 
-        else: return False
-    else:
-        if abs(f_pozice[0] - c_pozice[0]) == abs(f_pozice[1] - c_pozice[1]): return True
-        else: return False
+    # diagonalne
+    if (f_pozice[0] != c_pozice[0]) and (f_pozice[1] != c_pozice[1]):
+        if o1pole == True:
+            if (f_pozice[0] + smer[0] == c_pozice[0]) and (f_pozice[1] + smer[1] == c_pozice[1]): return True 
+            else: return False
+        else:
+            if abs(f_pozice[0] - c_pozice[0]) == abs(f_pozice[1] - c_pozice[1]): return True
+            else: return False
+    # horizontalne
+    if (f_pozice[0] == c_pozice[0]) or (f_pozice[1] == c_pozice[1]):
+        if o1pole == True:
+            if (f_pozice[0] + smer[0] == c_pozice[0]) and (f_pozice[1] + smer[1] == c_pozice[1]): return True 
+            else: return False
+        else:
+            px1 = abs(f_pozice[0]-c_pozice[0])
+            py1 = abs(f_pozice[1]-c_pozice[1])
+            if px1> py1: rozdil= px1 
+            else: rozdil = py1
+            if (f_pozice[0] + rozdil*smer[0] == c_pozice[0]) and (f_pozice[1] + rozdil*smer[1] == c_pozice[1]): return True
+            else: return False
+
 
 
     #
@@ -107,10 +122,31 @@ def figurka_v_ceste(f_typ, f_pozice, c_pozice,o_pozice, smer, o1pole, tah1):
         else: return False
     elif f_typ == 'jezdec': return False
 #        if (f_pozice[0] + smer[0] == c_pozice[0]) and (f_pozice[1] + smer[1] == c_pozice[1]): return True
-        
+
+    # diagonalne
+    if (f_pozice[0] != c_pozice[0]) and (f_pozice[1] != c_pozice[1]):
+        if abs(f_pozice[0] - c_pozice[0]) == abs(f_pozice[1] - c_pozice[1]): 
+            p = abs(f_pozice[0] - c_pozice[0])
+            for i in range(1, p+1):
+                if (f_pozice[0]+ i*smer[0],f_pozice[1]+ i*smer[1]) in o_pozice: return True
+#                else: return False
+        else: return False
+    # horizontalne
+    if (f_pozice[0] == c_pozice[0]) or (f_pozice[1] == c_pozice[1]):
+        px1 = abs(f_pozice[0]-c_pozice[0])
+        py1 = abs(f_pozice[1]-c_pozice[1])
+        if px1> py1: rozdil= px1 
+        else: rozdil = py1
+        for i in range(1,rozdil+1):
+            px1 = i*smer[0]
+            py1 = i*smer[1]
+            pp=(px1, py1)
+            if (f_pozice[0]+ px1,f_pozice[1]+ py1) in o_pozice: return True
+        else: return False
 
 
-    if c_pozice in obsazena_pozice:
+
+    if c_pozice in o_pozice:
         return True
     else: return False
 
@@ -152,9 +188,9 @@ def je_tah_mozny(figurka, cilova_pozice, obsazene_pozice):
             print("Cilova pozice je obsazena")
             return False
 
-        else:
+        #else:
             #print("cil je: ", test_cil)
-            """
+        """
         Ověří, zda se figurka může přesunout na danou pozici.
 
         :param figurka: Slovník s informacemi o figurce (typ, pozice).
@@ -168,7 +204,7 @@ def je_tah_mozny(figurka, cilova_pozice, obsazene_pozice):
             pravidlo_tahu = (figurka1['pozice'], (0,0), (0,0), (0,1), (0,0), (0,0), (0,0), (0,0), (0,0), True, True)
             if figurka1['pozice'][0]>2: pravidlo_tahu[10] = False
         elif figurka1['typ'] == 'jezdec':
-            pravidlo_tahu = (figurka1['pozice'], (0,0), (0,0), (0,0), (0,0), (-2,1), (2,1), (-2,-1), (2,-1), False, False)
+            pravidlo_tahu = (figurka1['pozice'], (0,0), (0,0), (0,0), (0,0), (-1,2), (1,2), (-1,-2), (1,-2), False, False)
         elif figurka1['typ'] == 'věž':
             pravidlo_tahu = (figurka1['pozice'], (-1,0), (1,0), (0,1), (0,-1), (0,0), (0,0), (0,0), (0,0), False, True)
         elif figurka1["typ"] == 'střelec':
@@ -186,7 +222,7 @@ def je_tah_mozny(figurka, cilova_pozice, obsazene_pozice):
             return False 
         elif urci_spravnost_tahu_podle_pravidel(figurka1["typ"], figurka1["pozice"], cilova_pozice1, pravidlo_tahu[smer_tahu_figurky[1]], pravidlo_tahu[9], pravidlo_tahu[10]) == False: return False 
         else:
-            figurka_v_ceste(figurka1["typ"], figurka1["pozice"], cilova_pozice1, obsazene_pozice1, pravidlo_tahu[smer_tahu_figurky[1]], pravidlo_tahu[9], pravidlo_tahu[10] )
+            if figurka_v_ceste(figurka1["typ"], figurka1["pozice"], cilova_pozice1, obsazene_pozice1, pravidlo_tahu[smer_tahu_figurky[1]], pravidlo_tahu[9], pravidlo_tahu[10] ) == True: return False
             return True
     
     #
@@ -200,12 +236,12 @@ if __name__ == "__main__":
     strelec = {"typ": "střelec", "pozice": (6, 3)}
     dama = {"typ": "dáma", "pozice": (8, 3)}
     kral = {"typ": "král", "pozice": (1, 4)}
-    obsazene_pozice = {(2, 2), (8, 2), (3, 3), (5, 4), (8, 3), (8, 8), (6, 3), (1, 4), (3,2)}
+    obsazene_pozice = {(2, 2), (8, 2), (3, 3), (5, 4), (8, 3), (8, 8), (6, 3), (1, 4)}
 
     
 
 #    print(je_tah_mozny(pesec, (3, 2), obsazene_pozice))  # True
-    print(je_tah_mozny(pesec, (4, 2), obsazene_pozice))  # True, při prvním tahu, může pěšec jít o 2 pole dopředu
+#    print(je_tah_mozny(pesec, (4, 2), obsazene_pozice))  # True, při prvním tahu, může pěšec jít o 2 pole dopředu
 #    print(je_tah_mozny(pesec, (5, 2), obsazene_pozice))  # False, protože pěšec se nemůže hýbat o tři pole vpřed (pokud jeho výchozí pozice není v prvním řádku)
 #    print(je_tah_mozny(pesec, (1, 2), obsazene_pozice))  # False, protože pěšec nemůže couvat
 #    print(je_tah_mozny(pesec, (3, 4), obsazene_pozice))  # False, protože pěšec nemůže couvat
@@ -214,7 +250,16 @@ if __name__ == "__main__":
     #print(je_tah_mozny(jezdec, (5, 4), obsazene_pozice))  # False, tato pozice je obsazená jinou figurou
     #print(je_tah_mozny(jezdec, (1, 2), obsazene_pozice))  # True
     #print(je_tah_mozny(jezdec, (9, 3), obsazene_pozice))  # False, je to pozice mimo šachovnici
+    #print(je_tah_mozny(jezdec, (1, 1), obsazene_pozice))  # False, tah je mimo pravidla pohybu jezdce
 
-#    print(je_tah_mozny(dama, (8, 1), obsazene_pozice))  # False, dámě v cestě stojí jiná figura
+    #print(je_tah_mozny(dama, (8, 1), obsazene_pozice))  # False, dámě v cestě stojí jiná figura
     #print(je_tah_mozny(dama, (1, 3), obsazene_pozice))  # False, dámě v cestě stojí jiná figura
-#    print(je_tah_mozny(dama, (3, 8), obsazene_pozice))  # True
+    #print(je_tah_mozny(dama, (3, 8), obsazene_pozice))  # True
+    #print(je_tah_mozny(dama, (6, 5), obsazene_pozice))  # True
+    #print(je_tah_mozny(dama, (3, 7), obsazene_pozice))  # False, tah je mimo pravidla pohybu dámy
+
+    #print(je_tah_mozny(vez, (3, 8), obsazene_pozice))  # True
+    print(je_tah_mozny(vez, (8, 1), obsazene_pozice))  # False, figurka v cestě
+    #print(je_tah_mozny(vez, (3, 8), obsazene_pozice))  # True
+    #print(je_tah_mozny(vez, (3, 8), obsazene_pozice))  # True
+    #print(je_tah_mozny(vez, (3, 8), obsazene_pozice))  # True
