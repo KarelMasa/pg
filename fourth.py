@@ -138,7 +138,7 @@ def je_tah_mozny(figurka, cilova_pozice, obsazene_pozice):
     # pravidlo_tahu = (pozice, vlevo, vpravo, nahoru, dolu, l_na, p_na, l_do, p_do, pouze_o_1_pole = True/False, specificky_prvni_tah = True/False)
         if figurka1['typ'] == 'pěšec':
             pravidlo_tahu = (figurka1['pozice'], (0,0), (0,0), (0,1), (0,0), (0,0), (0,0), (0,0), (0,0), True, True)
-            if figurka1['pozice'][0]>2: pravidlo_tahu[10] = False
+    #        if figurka1['pozice'][0]>2: pravidlo_tahu[10] = False
         elif figurka1['typ'] == 'jezdec':
             pravidlo_tahu = (figurka1['pozice'], (0,0), (0,0), (0,0), (0,0), (-1,2), (1,2), (-1,-2), (1,-2), False, False)
         elif figurka1['typ'] == 'věž':
@@ -149,6 +149,7 @@ def je_tah_mozny(figurka, cilova_pozice, obsazene_pozice):
             pravidlo_tahu = (figurka1['pozice'], (-1,0), (1,0), (0,1), (0,-1), (-1,1), (1,1), (-1,-1), (1,-1), False, False)
         elif figurka1['typ'] == 'král':
             pravidlo_tahu = (figurka1['pozice'], (-1,0), (1,0), (0,1), (0,-1), (-1,1), (1,1), (-1,-1), (1,-1), True, True)
+        pravidlo_tahu = list(pravidlo_tahu)
         smer_tahu_figurky = urci_smer_tahu(figurka1["pozice"],cilova_pozice1)
         # pokud je dle pravidel tahu figurky označení směru (0,0), figurka tímto směrem táhnout nemůže
         if pravidlo_tahu[smer_tahu_figurky] == (0,0) or smer_tahu_figurky == None: 
@@ -175,7 +176,9 @@ if __name__ == "__main__":
     print(je_tah_mozny(pesec, (5, 2), obsazene_pozice))  # False, protože pěšec se nemůže hýbat o tři pole vpřed (pokud jeho výchozí pozice není v prvním řádku)
     print(je_tah_mozny(pesec, (1, 2), obsazene_pozice))  # False, protože pěšec nemůže couvat
     print(je_tah_mozny(pesec, (3, 4), obsazene_pozice))  # False, protože pěšec nemůže couvat
-
+    print("*********************")
+    print(je_tah_mozny({'typ': 'pěšec', 'pozice': (2, 4)}, (3, 4), {(2, 4), (8, 2), (3, 3), (5, 4), (8, 6), (8, 8), (6, 3), (1, 4)}))
+    print("*********************")
     print(je_tah_mozny(jezdec, (4, 4), obsazene_pozice))  # False, jezdec se pohybuje ve tvaru písmene L (2 pozice jedním směrem, 1 pozice druhým směrem)
     print(je_tah_mozny(jezdec, (5, 4), obsazene_pozice))  # False, tato pozice je obsazená jinou figurou
     print(je_tah_mozny(jezdec, (1, 2), obsazene_pozice))  # True
