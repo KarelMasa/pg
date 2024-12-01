@@ -9,6 +9,10 @@ png_header = b'\x89PNG\r\n\x1a\n'
 
 
 def read_header(file_name, header_length):
+    with open(file_name, "rb") as soubor:
+        fileheader = soubor.read(header_length)
+        #if fileheader == jpeg_header: return 
+
     """
     Tato funkce načte binární soubor z cesty file_name,
     z něj přečte prvních header_length bytů a ty vrátí pomocí return
@@ -62,6 +66,12 @@ def print_file_type(file_name):
 
 
 if __name__ == '__main__':
+    try:
+        file_name = sys.argv[1]
+        print_file_type(file_name)
+    except IndexError:
+        print("Nebyly zadany soubory")
+    except FileNotFoundError:
+        print(f"Soubor neexistuje")
     # přidej try-catch blok, odchyť obecnou vyjímku Exception a vypiš ji
-    file_name = sys.argv[1]
-    print_file_type(file_name)
+
