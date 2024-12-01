@@ -1,7 +1,7 @@
 import sys
 import os
 import pathlib
-from pathlib import Path
+#from pathlib import Path
 
 def list_files_recursive(directory):
     files = []
@@ -10,8 +10,8 @@ def list_files_recursive(directory):
             files.append(os.path.join(dirpath, filename))
     return files
 
-def list_files_pathlib(directory):
-    return [str(file) for file in Path(directory).iterdir() if file.is_file()]
+#def list_files_pathlib(directory):
+ #   return [str(file) for file in Path(directory).iterdir() if file.is_file()]
 
 
 # Example usage
@@ -37,8 +37,12 @@ if __name__ == '__main__':
 
 # Example usage
         directory_path = '.'
-        files_list = list_files_pathlib(".")
-        print(files_list)
+        #files_list = list_files_pathlib(".")
+        #print(files_list)
+        file_list = print(pathlib.Path.cwd().glob("."))
+        print(pathlib.Path.cwd())
+        print(file_list)
+        pathlib.Path.cwd().glob("ki*")
 
 
     except IndexError:
