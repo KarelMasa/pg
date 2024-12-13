@@ -11,6 +11,7 @@ def process_numbers(numbers):
     pom = {}
     delka = len(numbers)
    
+   
     for i in range(0, delka):
         if numbers[i] >=5:
             if numbers[i] == 10:
