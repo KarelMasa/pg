@@ -6,7 +6,27 @@
 
 def process_numbers(numbers):
     # ZDE NAPIŠTE VÁŠ KÓD
-    pass
+    
+    vysledek = []
+    pom = {}
+    delka = len(numbers)
+   
+    for i in range(0, delka):
+        if numbers[i] >=5:
+            if numbers[i] == 10:
+                return vysledek
+            else:
+                vysledek = vysledek.append(numbers[i]*2)
+        #if  > 5:
+            
+        #    pom = pom.append(int(i)*2)
+            #vysledek = vysledek.append(pom)
+        #    print(pom)  
+        #    print(vysledek)
+             
+    return vysledek
+
+
 
 # Pytest testy pro Příklad 1
 def test_process_numbers():

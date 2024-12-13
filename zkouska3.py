@@ -12,7 +12,31 @@ class Shape(ABC):
     def area(self):
         pass
 
+
+
+
+
 # ZDE DOPLŇTE VLASTNÍ KÓD
+
+
+
+class Rectangle(Shape):
+    def __init__(self, width, heigh ):
+        self.width = width
+        self.heigh = heigh
+    def area(self):
+
+        return self.width* self.heigh
+        
+    
+
+class Circle(Shape):
+    def __init__(self, radius):
+        self.radius = radius
+    def area(self):
+        return ((self.radius)*(self.radius)* 3,14)
+
+
 
 from unittest.mock import patch, MagicMock, mock_open
 
