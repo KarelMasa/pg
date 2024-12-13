@@ -8,7 +8,7 @@ def process_numbers(numbers):
     # ZDE NAPIŠTE VÁŠ KÓD
     
     vysledek = []
-    pom = {}
+    
     delka = len(numbers)
    
    
