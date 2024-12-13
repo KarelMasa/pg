@@ -34,7 +34,7 @@ class Circle(Shape):
     def __init__(self, radius):
         self.radius = radius
     def area(self):
-        return ((self.radius)*(self.radius)* 3,14)
+        return round(((self.radius)*(self.radius)* 3,14),2)
 
 
 
